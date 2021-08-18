@@ -1,5 +1,25 @@
 
 #Maps 3 + 4 #
+## ABOUT ##
+Maps implements panning, zooming, and shortest-path finding functionality between street intersections in Providence, centered around Brown University. 
+You can highlight shortest path between any two locations selected by clicking. We cut down loading time by dividing the map into 1000+ tiles and utilizing front-end caching for faster loading of the map upon rescaling
+We run a Java backend to find the shortest path between nodes, using MySQL and Google Guava caching to operate on over 1.3 million real paths in Providence
+
+Landing Page centered at Brown University campus:
+![Alt text](./images/Overview.png?raw==true "Overview")
+
+Path finding:
+![Alt text](./images/Route.png?raw==true "Path")
+
+Panning:
+![Alt text](./images/Pan.png?raw==true "Pan")
+
+Zooming in:
+![Alt text](./images/Zoom\ In.png?raw==true "Zoom in")
+
+Zooming out:
+![Alt text](./images/Zoom\ Out.png?raw==true "Zoom out")
+
 ## Design Overview ##
 ___
 
