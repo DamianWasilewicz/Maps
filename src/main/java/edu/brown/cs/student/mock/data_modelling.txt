@@ -1,0 +1,45 @@
+Question 1:
+The dataset you created was not bias-free. What are some assumptions that the developers of Mockaroo
+made about the types you explored? Who might be left out of the dataset? Consider the falsehoods you
+explored earlier.
+
+The developers of Mockaroo made some biased assumptions about fields in order to fit them in templates.
+First, I have to say that these assumptions are rooted in our society - society tells us that people should have a noun
+identifier that should start with an uppercase letter. Similarly, we bucket residential/industrial roads by giving them
+noun identifiers, and we then give all units within the bucket a unique number identifier, too, so that most addresses
+follow a somewhat universal format of <#> <st name> across the US. Some biases the Mockaroo team made are rooting in the
+definition of our understanding of how the world works and how the things in our world function.
+E.g. an email must have a <@address> suffix because that is how emails work.
+Some Falsehoods, however, lie between cultures. I did appreciate that for <datetime> the Mockaroo team internalized that
+some cultures and fields use different formats to denote time. However, these slight variations also apply for street
+Addresses. In Israel, we denote the <streetname> before denoting the <#>, we also don't have upper and lower case letters
+such that names don't follow the capitalization rule.
+The bottom line is that biases always exist, but it is because programmers find patterns that define elements in our lives
+and generalize them into a rule that covers the majority of cases.
+
+Question 2:
+When you made decisions about how you modelled your dataset, you made predictions about what future data
+you would be encountering. How did you make these decisions? Can you think of any edge cases that might
+break your model?
+
+In my modeling I didn't check the validity of inputs, but I accounted for blank inputs. Blanks could certainly pose an
+issue with datasets in the real world and I wanted to ensure that my program is able to internalize that data discrepancy
+by simply adding a placeholder "N/A" to any field value that was not provided. I assumed that the program that would
+need to use the data my function provides could break given a null input, so I gave it a universal identifier of that null
+but of the same type as the rest of the data, creating certain uniformity.
+I made decisions about modelling based creating uniformity in the data. I assume that creating data uniformity will be
+powerful because it allows for simpler manipulation of the data.
+
+Question 3:
+In this assignment we ask you to build an extensible REPL. How have you made your REPL extensible (beyond
+accessing multiple commands)? Let’s say you wanted to reuse your REPL code. What changes need to be made
+(if any) to your REPL? Consider the inversion-of-control reading and Lecture 2.In this assignment we ask
+you to build an extensible REPL. How have you made your REPL extensible (beyond accessing multiple commands)?
+Let’s say you wanted to reuse your REPL code. What changes need to be made (if any) to your REPL? Consider the
+inversion-of-control reading and Lecture 2.
+
+My REPL is designed to be reused. I considered the inversion of control reading and Lecture 2 and designed my repl to
+take in an object that stores a Hashmap of commands, so that no command calls are handled in the repl code itself.
+The only changes I would have to make if I wanted to reuse my repl would be to modify the regex code to fit my parsing
+need and instantiating a different top-level class that handles commands using a Hashmap. So really just changing 2
+arguments of 2 lines of code.

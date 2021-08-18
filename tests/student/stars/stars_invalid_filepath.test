@@ -1,0 +1,5 @@
+INPUT
+stars data/stars/confusion/one-star.csv
+OUTPUT
+ERROR:
+END

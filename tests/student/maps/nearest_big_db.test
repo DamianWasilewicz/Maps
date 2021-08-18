@@ -1,0 +1,7 @@
+INPUT
+map data/maps/maps.sqlite3
+nearest 41.7891192 -71.7984169
+OUTPUT
+map set to data/maps/maps.sqlite3
+/n/4178.7179.2172153728
+END

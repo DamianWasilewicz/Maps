@@ -1,0 +1,7 @@
+INPUT
+map data/maps/smallMaps.sqlite3
+naerests 42 -72
+OUTPUT
+map set to data/maps/smallMaps.sqlite3
+ERROR:
+END

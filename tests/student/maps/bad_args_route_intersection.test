@@ -1,0 +1,7 @@
+INPUT
+map data/maps/smallMaps.sqlite3
+route "invalid st" "nonexistent cross1 st" "unknown ln" "not a valid street street"
+OUTPUT
+map set to data/maps/smallMaps.sqlite3
+ERROR:
+END

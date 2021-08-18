@@ -1,0 +1,7 @@
+INPUT
+map data/maps/smallMaps.sqlite3
+wayz "42 street" "41st street" "41.8 street" "-71.3 lane"
+OUTPUT
+map set to data/maps/smallMaps.sqlite3
+ERROR:
+END

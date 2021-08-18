@@ -1,0 +1,46 @@
+input[type="number"] {
+  width: 3em;
+}
+body {
+  background-image: url("https://images.fineartamerica.com/images/artworkimages/mediumlarge/2/space-stars-texture-sololos.jpg");
+  text-align-all: center;
+  position: center;
+}
+
+#querytitle{
+  text-align: center;
+  font-family: "Arial Black";
+  color: yellow;
+}
+
+#requestForm{
+  /*text-align: center ;*/
+  font-family: "Arial Black";
+  width:50%;
+  margin-left:15%;
+  margin-right:15%;
+  float: left;
+}
+
+#submitButton{
+  background-color: honeydew;
+  border: yellow;
+  color: black;
+  padding: 10px 10px;
+  text-align: center;
+  display: block;
+  font-size: 16px;
+  font-family: "Arial Black";
+  margin: 2px 2px;
+  cursor: pointer;
+}
+
+#reurnValues{
+  /*text-align: center;*/
+  /*background: border-box;*/
+  font-family: "Arial Black";
+  font-size: larger;
+  color: honeydew;
+  width:50%;
+  float: left;
+}

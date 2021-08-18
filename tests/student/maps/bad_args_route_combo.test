@@ -1,0 +1,6 @@
+INPUT
+maps data/maps/smallMaps.sqlite3
+route 19.3 "Chihiro Ln" "LoveIsland Street" 12.3
+OUTPUT
+ERROR:
+END

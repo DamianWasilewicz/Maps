@@ -1,0 +1,26 @@
+GDPR requires that you specify exactly what you intend to do with each data point. Consider each data point that you’re
+gathering from your users (Name, location, timestamp). Writing to a user, justify why each data point is needed in an
+imaginary final version of your application: what eventual functionality might use the data?
+
+1. The premise of the app is to provide the best product possible to users. In our case, that is a map function that can
+span an entire database of coordinates on earth. In order to provide the best experience to users of our app, it is necessary
+to cache their location and timestamp for dynamic purposes. The location will be used as a default initial view of the application;
+the timestamp could be used for more advanced functionality, such as indicating if a location denoted on the map is open or closed
+(restaurant, shopping mall, or wherever you’re headed). The name is important for caching; identifying our users could help us provide
+them with the best experiences, for example as programmers we could implement an algorithm that will pin similar places to that a user
+frequents to provide them with suggested venues to explore. By providing a name, our user provides the app with an identity so that the
+app could perform faster for that identity and provide them with more exciting features.
+
+Consider a more complex application that you’ve interacted with before (Facebook, Steam, MyAnimeList) - why might it be difficult
+to delete all of the data on a user? Consider factors unique to the application you've chosen; specifically those other than volume
+or size of data.
+
+2. It might be difficult to delete data on a specific user from platforms where user specific data is tangled like facebook.
+Deleting one user’s data would have a direct effect on other users’ data, as opposed to deleting user data from a game app where
+users are independent of each other. Also, in the case of facebook, deleting all the data associated with a specific account is not
+enough. Users might still show in pictures of acquaintances who are facebook users if they weren’t tagged. Content on facebook
+might still be referring to user who’ve requested to be deleted from the platform if it wasn’t hyperlinked to their profile.
+It would be impossible for facebook to assure by 100% that all of a specific user’s data has been deleted from their servers.
+Therefore, platforms were user interaction creates dependency - essentially every social platform - will rely on user data for
+function, and so deleting a single user’s data could have a cascading effect on other user’s data, while not completely ensuring
+that all of the user’s data has been removed from the platform.

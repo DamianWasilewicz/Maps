@@ -1,0 +1,14 @@
+1. get age = 19; DELETE FROM solider;
+
+since the database is queried using the get command, we used the sql command DELETE FROM to delete from the
+table after doing a random (unaffected) query.
+
+2. get age = 19; SELECT COUNT(id) FROM soldier;
+
+returns the number of ids of soliders who are 19 years old.
+
+3. to ensure that SQL injections can’t occur on our own software is to prevent the use of metacharacters exploiting
+the database that our program is using. By parsing through the user input and feeding the parsed version of the
+input into any querying, it can be protected from malicious users.
+
+

@@ -1,0 +1,152 @@
+#!/usr/bin/python3
+
+import json 
+import urllib.parse as urlparse
+import random
+import _thread
+import calendar
+import time
+import sqlite3
+from http.server import BaseHTTPRequestHandler,HTTPServer
+from threading import Thread, Lock
+from sys import argv, exit
+from time import sleep
+import signal
+import sys
+
+# user for everyone on the staff :)
+users = [
+    "Tim Neslon",
+    "Colton Rusch",
+    "Daphne Li-Chen",
+    "Daniel Park",
+    "Abby Goldberg",
+    "Ben Silverman",
+    "Christine Wang",
+    "Grace Bramley-Simmons",
+    "Hari Dandapani",
+    "Ifechi Ilozor",
+    "Katherine Sang",
+    "Livia Zhu",
+    "Mel Cui",
+    "Milanca Wang",
+    "Prithu Dasgupta",
+    "Raj Paul",
+    "Ryan Simpson",
+    "Shenandoah Duraideivamani",
+    "Ell Li",
+    "Sarah Rockhill",
+    "Sol Boukman",
+    "Nick Young"
+]
+
+# These coordinates enclose the entire database,
+# we might have to tighten these values when testing.
+min_lat = 40.1581762
+max_lat = 42.0952906
+min_long = -73.7485663
+max_long = -70.5590942
+
+# unordered list of active user ids. 
+# The make changes thread will select a random
+# user from here and assign it a new location
+current_users = []
+# changes is a dictionary of timestamp to (user_id, name, latitude, longitude)
+changes = {}
+# change_times is an ordered list of the timestamps of changes, with the most
+# recent timestamp being first.
+change_times = []
+# mutex for accessing changes
+change_mutex = Lock()
+
+# handle ctrl-c
+def signal_handler(signal, frame):
+  print('You pressed Ctrl+C! Exiting...')
+  sys.exit(0)
+signal.signal(signal.SIGINT, signal_handler)
+
+# this thread is constantly updating traffic levels
+def make_changes():
+  while True:
+    sleep(random.uniform(0, 5))
+    change_mutex.acquire()
+    current_time = time.time()
+    current_id = random.choice(current_users)
+    changes[current_time] = (
+      current_time,
+      current_id,
+      users[current_id],
+      random.uniform(min_lat, max_lat),
+      random.uniform(min_long, max_long)
+    )
+    print(changes[current_time])
+    change_times.insert(0, current_time)
+    change_mutex.release()
+
+# The Webserverrrrrr
+class myHandler(BaseHTTPRequestHandler):
+  # Handler for the GET requests
+  def do_GET(self):
+    # ignore requests for favicon
+    if self.path == '/favicon.ico':
+      return
+
+    # parse the url parameters
+    parsed_path = urlparse.urlparse(self.path)
+    get_parameters = [x for x in [p.split('=') for p in parsed_path[4].split('&')] if x]
+    timestamp = 0
+    for param in get_parameters:
+      if param[0] == 'last':
+        timestamp = param[1]
+        break
+
+    # build the list of updates the user hasn't seen yet
+    response = []
+    change_mutex.acquire()
+    for date in change_times:
+      if int(date) < int(timestamp):
+        break 
+      response.append(changes[date])
+    change_mutex.release()
+    
+    # bombs away
+    self.send_response(200)
+    self.send_header('Content-type','application/json')
+    self.end_headers()
+    # Send the html message
+    self.wfile.write(bytes(json.dumps(response), "utf-8"))
+    return
+
+if len(argv) != 4:
+  print('error: Usage: {0} <port> <num users> <database flag>'.format(argv[0]))
+  print('The address and port number should point to your server process.')
+  exit(0)
+
+# check to see if using small maps database
+if '-s' in argv[3]:
+  min_lat = 41.82
+  max_lat = 41.8206
+  min_long = -71.4003
+  max_long = -71.4
+    
+# get user sample for testing purposes    
+user_batch_size = min(int(argv[2]), len(users))
+data = list(range(len(users)))
+random.shuffle(data)
+current_users = data[:user_batch_size]
+
+# verify the port is correct
+try:
+  port = int(argv[1])
+except Exception:
+  print('Error with the port number "{0}". Exiting.'.format(argv[1]))
+  exit(0)
+
+#Create a web server and define the handler to manage the
+#incoming request
+server = HTTPServer(('', port), myHandler)
+print('Started httpserver on port {0}'.format(port))
+
+_thread.start_new_thread(make_changes, ())
+#Wait forever for incoming http requests
+server.serve_forever()

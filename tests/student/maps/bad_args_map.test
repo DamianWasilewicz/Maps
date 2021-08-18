@@ -1,0 +1,5 @@
+INPUT
+map data/maps/notReal.sqlite3
+OUTPUT
+ERROR:
+END

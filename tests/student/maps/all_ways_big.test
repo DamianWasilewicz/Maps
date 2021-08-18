@@ -1,0 +1,5 @@
+INPUT
+map data/maps/maps.sqlite3
+OUTPUT
+map set to data/maps/maps.sqlite3
+END
