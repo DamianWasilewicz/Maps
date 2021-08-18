@@ -15,10 +15,10 @@ Panning:
 ![Alt text](./images/Pan.png?raw==true "Pan")
 
 Zooming in:
-![Alt text](./images/"Zoom In".png?raw==true "Zoom in")
+![Alt text](./images/Zoom\ In.png?raw==true "Zoom in")
 
 Zooming out:
-![Alt text](./images/"Zoom Out".png?raw==true "Zoom out")
+![Alt text](./images/Zoom\ Out.png?raw==true "Zoom out")
 
 ## Design Overview ##
 ___
